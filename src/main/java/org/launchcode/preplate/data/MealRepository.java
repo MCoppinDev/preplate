@@ -1,14 +1,14 @@
 package org.launchcode.preplate.data;
 
 
-import org.launchcode.preplate.models.User;
+import org.launchcode.preplate.models.Meal;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface MealRepository extends CrudRepository<Meal,Integer> {
 
-//    User findByUsername(String username);
+
 
 
 }

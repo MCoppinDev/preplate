@@ -1,12 +1,12 @@
 package org.launchcode.preplate.models;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.Entity;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.*;
+//import javax.validation.constraints.Email;
+//import javax.validation.constraints.NotBlank;
+//import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,37 +14,63 @@ import java.util.List;
 @Entity
 public class User extends AbstractEntity {
 
-    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    @NotNull
-    @NotBlank
-    @Email
-    @Size(min = 4, max = 20)
-    private String email;
-
-    @NotNull
-    @NotBlank
-    private String pwHash;
-
+    @ManyToMany
     private List<Meal> meals = new ArrayList<>();
-
-    private List<Ingredient> allergies = new ArrayList<>();
 
     public User() {}
 
-
-
-    public User(String email, String password) {
-        this.email = email;
-        this.pwHash = encoder.encode(password);
+    public User(List<Meal> userMeals){
+        this.meals= userMeals;
     }
 
-    public String getEmail() {
-        return email;
+    public List<Meal> getMeals() {
+        return meals;
     }
 
-    public boolean isMatchingPassword(String password) {
-        return encoder.matches(password, this.pwHash);
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
     }
+
+
+    // ***Implementing after initial functionality is present.***
+
+//    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private UserProfile userProfile;
+//
+//    @NotNull
+//    @NotBlank
+//    @Email
+//    private String username;
+//
+//    @NotNull
+//    @NotBlank
+//    private String pwHash;
+//
+
+
+//    public UserProfile getUserProfile() {
+//        return userProfile;
+//    }
+//
+//    public void setUserProfile(UserProfile userProfile) {
+//        this.userProfile = userProfile;
+//    }
+//
+//
+//    public User(String username, String password) {
+//        this.username = username;
+//        this.pwHash = password;
+//    }
+//
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    public boolean isMatchingPassword(String password) {
+//        return encoder.matches(password, pwHash);
+//    }
 
 }
