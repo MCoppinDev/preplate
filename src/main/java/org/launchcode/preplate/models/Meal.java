@@ -1,9 +1,6 @@
 package org.launchcode.preplate.models;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +11,7 @@ public class Meal extends AbstractEntity{
 //    private Recipe recipe;
 
     private String description;
+
 
 //    ** Relationship for User Class **
 //    @ManyToMany(mappedBy = "userMeals")

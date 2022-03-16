@@ -9,6 +9,7 @@
 
 <div class="container-mt-4">
 
+
     <div class="row" style="margin-top:30px">
         <div class="col text-center table-responiive-md">
             <form method="post">
@@ -20,17 +21,27 @@
                     <th>Ingredients</th>
                 </tr>
                     <tr th:each=" meal : ${meals}">
-                        <td><input type="checkbox" value="${meal.id}"></td>
+
+                        <td><input type="checkbox" name="meals" th:value="${meal.id}"></td>
                         <td th:text="${meal.name}"></td>
                         <td th:text="${meal.description}"></td>
-                        <td><ul th:each="ingredient : ${meal.ingredients}">
-                            <li th:text="${ingredient.name}"></li>
-                        </ul>
+
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                   View Ingredients
+                                </button>
+                                <div class="dropdown-menu">
+                                    <span class="dropdown-item-text hover" th:each="ingredient : ${meal.ingredients}" th:text="${ingredient.name}"></span>
+                                </div>
+                            </div>
+
                         </td>
 
                     </tr>
             </table>
-                <button class="btn btn-primary" type="submit" value="Save Meals">Save Meals</button>
+                <input type>
+                <button class="btn btn-primary" type="submit">Save Meals</button>
             </form>
         </div>
     </div>

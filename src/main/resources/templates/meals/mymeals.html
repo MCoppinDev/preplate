@@ -15,7 +15,7 @@
         <th>Description</th>
         <th>Ingredients</th>
     </tr>
-    <tr th:each=" meal : ${meals}">
+    <tr th:each=" meal : ${myMeals}">
         <td th:text="${meal.name}"></td>
         <td th:text="${meal.description}"></td>
         <td><ul th:each="ingredient : ${meal.ingredients}">

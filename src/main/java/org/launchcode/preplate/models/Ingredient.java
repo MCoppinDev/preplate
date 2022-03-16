@@ -22,13 +22,13 @@ public class Ingredient extends AbstractEntity{
         this.setName(name);
     }
 
-//    public List<Meal> getMeals() {
-//        return forMeals;
-//    }
-//
-//    public void setMeals(List<Meal> meals) {
-//        this.forMeals = meals;
-//    }
+    public List<Meal> getMeals() {
+        return forMeals;
+    }
+
+    public void setMeals(List<Meal> meals) {
+        this.forMeals = meals;
+    }
 
 //    public List<UserProfile> getUserProfiles() {
 //        return userProfiles;

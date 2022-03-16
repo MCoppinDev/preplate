@@ -1,3 +1,13 @@
 .error {
   color: red;
 }
+
+.jumbotron {
+   background-image: url("../img/bgimg1.jpg");
+  background-size: cover;
+  }
+
+  .img{
+  background-image: url("../img/bgimg2.jpg")
+
+  }
