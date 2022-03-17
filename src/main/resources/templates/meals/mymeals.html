@@ -3,28 +3,62 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body>
 
 <header th:replace="fragments :: site-header"></header>
 
 <div class="container">
-<table class="table table-dark table-hover">
-    <tr>
-        <th>Select</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Ingredients</th>
-    </tr>
-    <tr th:each=" meal : ${myMeals}">
-        <td th:text="${meal.name}"></td>
-        <td th:text="${meal.description}"></td>
-        <td><ul th:each="ingredient : ${meal.ingredients}">
-            <li th:text="${ingredient.name}"></li>
-        </ul>
-        </td>
 
-    </tr>
-</table>
+<!--    select the customized meal list-->
+        <div class="row">
+            <div class="col" style="align-content-center">
+                <form id="mealList" method="post">
+                    <select form="mealList" name="userId">
+                        <option th:each="list : ${mealList}"
+                                th:value="${list.id}"
+                                th:text="${list.name}">
+                        </option>
+                    </select>
+                    <button type="submit">Select List</button>
+                </form>
+            </div>
+        </div>
+
+<!--display meal list-->
+    <div class="row">
+        <div class="col">
+            <table class="table table-dark table-hover">
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Ingredients</th>
+                </tr>
+                <tr th:each="meal : ${selectedList}">
+                    <td th:text="${meal.name}"></td>
+                    <td th:text="${meal.description}"></td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+
+<!-- List Groceries-->
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover table-dark">
+                <tr>
+                    <th>Have</th>
+                    <th>Grocery List</th>
+                </tr>
+                <tr th:each="meals: ${selectedList}">
+                <td th:text="${meals.ingredients.name}"></td>
+            </tr>
+
+
+            </table>
+        </div>
+    </div>
+
 </div>
 
 </body>
