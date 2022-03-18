@@ -11,7 +11,7 @@
 
 
     <div class="row" style="margin-top:30px">
-        <div class="col text-center table-responiive-md">
+        <div class="col text-center" style="align-content-center ">
             <form method="post">
             <table class="table table-dark table-hover">
                 <tr>
@@ -37,11 +37,12 @@
                             </div>
 
                         </td>
-
                     </tr>
             </table>
                 <input type="text" th:field="${user.name}" placeholder="Name of Meal List">
+                <span th:errors="${user.name}" class="error"></span>
                 <button class="btn btn-primary" type="submit">Save Meals</button>
+                <a class="btn btn-success" href="/meals/add">New Meal</a>
             </form>
         </div>
     </div>

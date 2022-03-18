@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,7 @@ public class MealController {
     ){
         if (errors.hasErrors()) {
             model.addAttribute("title", "Meals");
+            model.addAttribute("meals", mealRepository.findAll());
             return "meals/index";
         }
 
@@ -59,19 +61,28 @@ public class MealController {
 
     @GetMapping("add")
     public String displayAddMealForm(Model model){
+
+
         model.addAttribute(new Meal());
         model.addAttribute("title", "Add Meal");
-        return"add";
+        model.addAttribute("ingredients",ingredientRepository.findAll());
+        return"meals/add";
     }
 
     @PostMapping("add")
     public String processAddMealForm(@ModelAttribute @Valid Meal newMeal,
-                                    Errors errors, Model model,  @RequestParam List<Integer> ingredients) {
+                                    Errors errors,
+                                     Model model,
+                                     @RequestParam List<Integer> ingredients,
+                                     @RequestParam(required=false)String description) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Meal");
-            return "add";
+            model.addAttribute("ingredients",ingredientRepository.findAll());
+            return "meals/add";
         }
+
+        newMeal.setDescription(description);
 
         List<Ingredient> ingredientsObjs = (List<Ingredient>) ingredientRepository.findAllById(ingredients);
         newMeal.setIngredients(ingredientsObjs);
@@ -85,8 +96,11 @@ public class MealController {
 
     @GetMapping("mymeals")
     public String displayMyMeals(Model model){
+
+
         model.addAttribute("title","My Meals");
         model.addAttribute("mealList", userRepository.findAll());
+
         return"meals/mymeals";
 
 
@@ -99,6 +113,7 @@ public class MealController {
 
        Optional<User> userObj = userRepository.findById(userId);
 
+
        if(userObj.isPresent()){
 
            User userList = userObj.get();
@@ -107,17 +122,53 @@ public class MealController {
 
             selectedList = userList.getMeals();
 
+            Integer listId = userList.getId();
+
 
 
            model.addAttribute("selectedList", selectedList);
            model.addAttribute("listName", listName);
+           model.addAttribute("listId",listId);
+
+
 
        }
-//        selectedList = (List<Meal>)mealRepository.findAll();
+
+        model.addAttribute("mealList", userRepository.findAll());
 
         return "meals/mymeals";
 
 
+    }
+
+    @GetMapping("delete")
+    public String displayDeleteUserMeals(Model model){
+
+
+
+        model.addAttribute("lists", userRepository.findAll());
+        model.addAttribute("title", "Delete List");
+
+
+
+
+        return"meals/delete";
+    }
+
+    @PostMapping("delete")
+    public String processDeleteUserMeals(@RequestParam(required = false) int[] mealListIds) {
+
+
+
+        if (mealListIds != null) {
+
+            for (int id : mealListIds) {
+                userRepository.deleteById(id);
+            }
+
+        }
+
+        return "redirect:mymeals";
     }
 
 

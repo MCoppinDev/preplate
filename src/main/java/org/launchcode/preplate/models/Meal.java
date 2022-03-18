@@ -1,6 +1,7 @@
 package org.launchcode.preplate.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class Meal extends AbstractEntity{
 //    private List<UserProfile> userProfile = new ArrayList<>();
 
 
+    @NotNull(message = "Must have ingredients for meal.")
     @ManyToMany
     private List<Ingredient> ingredients = new ArrayList<>();
 

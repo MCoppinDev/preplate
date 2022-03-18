@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
-<head th:replace="fragments :: head"></head>
+<head th:replace="fragments :: head">
+</head>
 
 <body>
 
@@ -9,53 +10,82 @@
 
 <div class="container">
 
-<!--    select the customized meal list-->
-        <div class="row">
-            <div class="col" style="align-content-center">
-                <form id="mealList" method="post">
-                    <select form="mealList" name="userId">
-                        <option th:each="list : ${mealList}"
-                                th:value="${list.id}"
-                                th:text="${list.name}">
-                        </option>
-                    </select>
-                    <button type="submit">Select List</button>
-                </form>
-            </div>
-        </div>
+    <!--    select the customized meal list-->
+    <div class="row">
+        <div class="col" style="align-content-center">
+            <form id="mealList" method="post">
+                <select form="mealList" name="userId">
+                    <option th:each="list : ${mealList}"
+                            th:value="${list.id}"
+                            th:text="${list.name}">
+                    </option>
+                </select>
+                <button class="btn btn-info" type="submit">Select List</button>
 
-<!--display meal list-->
+            </form>
+
+        </div>
+    </div>
+
+    <!--display meal list-->
     <div class="row">
         <div class="col">
             <table class="table table-dark table-hover">
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Ingredients</th>
+
                 </tr>
                 <tr th:each="meal : ${selectedList}">
                     <td th:text="${meal.name}"></td>
                     <td th:text="${meal.description}"></td>
-
                 </tr>
             </table>
         </div>
     </div>
 
-<!-- List Groceries-->
+    <!-- List Groceries-->
+
     <div class="row">
-        <div class="col">
-            <table class="table table-hover table-dark">
-                <tr>
-                    <th>Have</th>
-                    <th>Grocery List</th>
-                </tr>
-                <tr th:each="meals: ${selectedList}">
-                <td th:text="${meals.ingredients.name}"></td>
-            </tr>
+        <div class="col-lg-5 mx-auto">
+
+            <!-- CHECKBOX LIST -->
+            <div class="card rounded border-0 shadow-sm position-relative">
+                <div class="card-body p-10 scroll">
+                    <div class="d-flex align-items-center mb-4 pb-4 border-bottom"><i
+                            class="far fa-calendar-alt fa-3x"></i>
+                        <div class="ms-3">
+                            <h4 class="text-uppercase fw-weight-bold mb-0">Grocery List</h4>
+
+                        </div>
+                    </div>
+                    <th:block th:each="meals : ${selectedList}">
+                        <div th:each="ingredient : ${meals.ingredients}" class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label"><span th:text="${ingredient.name}"
+                                                                  class="fst-italic pl-1"></span></label>
+                        </div>
+                    </th:block>
+
+                </div>
+            </div>
+            <!--    <div class="row">-->
+            <!--        <div class="col">-->
+            <!--            <table class="table table-hover table-dark">-->
+            <!--                <tr>-->
+            <!--                    <th>Have</th>-->
+            <!--                    <th>Grocery List</th>-->
+            <!--                </tr>-->
+            <!--                <tr th:each="meals: ${selectedList}">-->
+            <!--                    <th:block th:each="ingredients : ${meals.ingredients}">-->
+            <!--                        <td> <input type="checkbox"> </td>-->
+            <!--                        <td th:text="${ingredients.name}"></td>-->
+            <!--                    </th:block>-->
+
+            <!--            </tr>-->
 
 
-            </table>
+            <!--            </table>-->
         </div>
     </div>
 
@@ -63,3 +93,26 @@
 
 </body>
 </html>
+
+<!--<div class="row">-->
+<!--    <div class="col-lg-5 mx-auto">-->
+
+<!--        &lt;!&ndash; CHECKBOX LIST &ndash;&gt;-->
+<!--        <div class="card rounded border-0 shadow-sm position-relative">-->
+<!--            <div class="card-body p-5">-->
+<!--                <div class="d-flex align-items-center mb-4 pb-4 border-bottom"><i class="far fa-calendar-alt fa-3x"></i>-->
+<!--                    <div class="ms-3">-->
+<!--                        <h4 class="text-uppercase fw-weight-bold mb-0">Ingredients</h4>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div th:each="meals : ${selectedList}" class="form-check mb-3">-->
+<!--                    <th:block th:each="ingredients : ${meals.ingredients}">-->
+<!--                        <input class="form-check-input" id="flexCheck1" type="checkbox" checked>-->
+<!--                        <label class="form-check-label" for="flexCheck1"><span th:text="${ingredients.name}" class="fst-italic pl-1"></span></label>-->
+<!--                    </th:block>-->
+
+<!--                </div>-->
+<!--             -->
+<!--            </div>-->
+<!--        </div>-->

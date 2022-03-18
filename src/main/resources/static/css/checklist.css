@@ -1,0 +1,30 @@
+  ========================================== */
+.holder {
+  background: #f0efe9;
+  min-height: 100vh;
+}
+
+.rounded {
+  border-radius: 1rem !important;
+}
+
+.text-gray {
+  color: #aaa;
+}
+
+input:checked + label {
+  text-decoration: line-through;
+  color: #adb5bd;
+}
+
+label {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+.scroll {
+    max-height: 500px;
+    overflow-y: auto;
+}
