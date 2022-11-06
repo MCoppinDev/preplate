@@ -9,47 +9,69 @@
 
 <div class="container-mt-4">
 
+    <div class="holder d-flex align-items-center justify-content-center">
 
-    <div class="row" style="margin-top:30px">
-        <div class="col text-center" style="align-content-center ">
-            <form method="post">
-            <table class="table table-dark table-hover">
-                <tr>
-                    <th>Select</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Ingredients</th>
-                </tr>
-                    <tr th:each=" meal : ${meals}">
+        <div class="container">
 
-                        <td><input type="checkbox" name="meals" th:value="${meal.id}"></td>
-                        <td th:text="${meal.name}"></td>
-                        <td th:text="${meal.description}"></td>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <form method="post">
+                        <div class="card rounded shadow border-0">
+                            <div class="card-body">
 
-                        <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                   View Ingredients
-                                </button>
-                                <div class="dropdown-menu">
-                                    <span class="dropdown-item-text hover" th:each="ingredient : ${meal.ingredients}" th:text="${ingredient.name}"></span>
+                                <div class="table-responsive">
+                                    <table id="mealIndex" style="width:100%"
+                                           class="table table-dark table-hover">
+
+                                        <thead>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Ingredients</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:field="${user.meals}" th:each=" meal : ${meals}">
+
+                                            <td><input type="checkbox" name="meals" th:value="${meal.id}"></td>
+                                            <td th:text="${meal.name}"></td>
+                                            <td th:text="${meal.description}"></td>
+
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                                            data-toggle="dropdown">
+                                                        View Ingredients
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <span class="dropdown-item-text hover"
+                                                              th:each="ingredient : ${meal.ingredients}"
+                                                              th:text="${ingredient.name}"></span>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <input type="text" th:field="${user.name}" placeholder="Name of Meal List">
+                                    <button class="btn btn-primary" type="submit">Save Meals</button>
+                                    <a class="btn btn-success" href="/meals/add">New Meal</a>
+                                    <span th:errors="${user.name}" class="error"></span>
+                                    <span th:errors="${user.meals}" class="error"></span>
+                                    <span th:text="${error}" class="error"></span>
+
                                 </div>
                             </div>
 
-                        </td>
-                    </tr>
-            </table>
-                <input type="text" th:field="${user.name}" placeholder="Name of Meal List">
-                <span th:errors="${user.name}" class="error"></span>
-                <button class="btn btn-primary" type="submit">Save Meals</button>
-                <a class="btn btn-success" href="/meals/add">New Meal</a>
-            </form>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-
-
-
-
 </div>
 
 </body>

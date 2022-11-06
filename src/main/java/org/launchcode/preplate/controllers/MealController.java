@@ -43,7 +43,7 @@ public class MealController {
     @PostMapping("")
     public String processSaveMeals(@ModelAttribute @Valid User user, Errors errors,
                                    Model model,
-                                   @RequestParam List<Integer>meals
+                                   @RequestParam(required = false) List<Integer>meals
     ){
         if (errors.hasErrors()) {
             model.addAttribute("title", "Meals");
@@ -51,11 +51,17 @@ public class MealController {
             return "meals/index";
         }
 
-        List<Meal> mealObjs = (List<Meal>) mealRepository.findAllById(meals);
-        user.setMeals(mealObjs);
+        try {
+            List<Meal> mealObjs = (List<Meal>) mealRepository.findAllById(meals);
+            user.setMeals(mealObjs);
 
-        userRepository.save(user);
-
+            userRepository.save(user);
+        }catch(Exception e){
+            model.addAttribute("error","You must have at leas one meal selected.");
+            model.addAttribute("title", "Meals");
+            model.addAttribute("meals", mealRepository.findAll());
+            return "meals/index";
+        }
         return"redirect:";
     }
 

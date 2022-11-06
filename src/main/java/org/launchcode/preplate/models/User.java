@@ -3,6 +3,8 @@ package org.launchcode.preplate.models;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 //import javax.validation.constraints.Email;
 //import javax.validation.constraints.NotBlank;
 //import javax.validation.constraints.NotNull;
@@ -15,6 +17,7 @@ import java.util.List;
 public class User extends AbstractEntity{
 
 
+    @NotNull(message = "You must have a selection of meals")
     @ManyToMany
     private List<Meal> meals = new ArrayList<>();
 

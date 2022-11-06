@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
+
+<head th:replace="fragments :: head"></head>
 
 <header th:replace="fragments :: header"></header>
 
@@ -28,7 +26,7 @@
 
                                     </tr>
                                     <tbody>
-                                    <tr th:each="Ingredient:${ingredients}">
+                                    <tr th:each="ingredient:${ingredients}">
                                         <td><input type="checkbox" name="ingredientIds" th:value="${ingredient.id}">
                                         </td>
                                         <td th:text="${ingredient.name}"></td>

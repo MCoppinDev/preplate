@@ -12,6 +12,12 @@ $(function() {
 
 $(function() {
   $(document).ready(function() {
-    $('#ingredientsAdd').DataTable();
+    $('#ingredientAdd').DataTable();
+  });
+});
+
+$(function() {
+  $(document).ready(function() {
+    $('mealIndex').DataTable();
   });
 });

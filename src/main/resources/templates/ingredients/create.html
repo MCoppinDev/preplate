@@ -27,8 +27,9 @@
 
                                         <th>Ingredients</th>
                                     </tr>
+                                    </thead>
                                     <tbody>
-                                    <tr th:each="Ingredient:${ingredients}">
+                                    <tr th:each="ingredient:${ingredients}">
                                         <td th:text="${ingredient.name}"></td>
                                     </tr>
                                     </tbody>

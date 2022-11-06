@@ -44,13 +44,13 @@ public class IngredientController {
         }
 
         ingredientRepository.save(newIngredient);
-        return "redirect:";
+        return "redirect:create";
     }
 
     @GetMapping("delete")
     public String displayDeleteIngredients(Model model) {
-        model.addAttribute("title", "Delete Event");
-        model.addAttribute("events", ingredientRepository.findAll());
+        model.addAttribute("title", "Delete Ingredient");
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         return "ingredients/delete";
     }
 
@@ -63,7 +63,7 @@ public class IngredientController {
             }
         }
 
-        return "redirect:";
+        return "redirect:delete";
     }
 
 
