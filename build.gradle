@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-//	implementation 'org.springframework.security:spring-security-crypto'
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -25,4 +25,14 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+task customFatJar(type: Jar) {
+	manifest {
+		attributes 'Main-Class': 'org.launchcode.preplate.PreplateApplication'
+	}
+	baseName = 'all-in-one-jar'
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
 }
